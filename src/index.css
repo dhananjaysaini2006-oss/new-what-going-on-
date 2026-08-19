@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --bg-light: #FBFBF9;
+    --text-primary-light: #111215;
+    --text-secondary-light: #5F6368;
+    --border-light: #D9D9D5;
+    --accent-red: #E63946;
+    --accent-warm: #B7A58A;
+    --bg-dark: #0F1115;
+    --card-dark: #1A1D24;
+    --text-primary-dark: #F5F5F2;
+    --text-secondary-dark: #A7AAB0;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+
+  h1, h2, h3, .font-serif-headline {
+    font-family: 'Newsreader', 'Playfair Display', Georgia, serif;
+    font-feature-settings: "liga", "kern";
+  }
+
+  .font-display {
+    font-family: 'Playfair Display', 'Newsreader', Georgia, serif;
+  }
+
+  .font-sans-ui {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+}
+
+@keyframes ticker {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-ticker {
+  display: flex;
+  width: max-content;
+  animation: ticker 42s linear infinite;
+}
+
+.animate-ticker:hover,
+.ticker-paused {
+  animation-play-state: paused !important;
+}
+
+/* Custom Scrollbar for sleek horizontal tabs and article reading */
+::-webkit-scrollbar {
+  height: 5px;
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #D9D9D5;
+  border-radius: 4px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #2E333D;
+}
+
+/* Newspaper drop cap */
+.drop-cap::first-letter {
+  font-family: 'Playfair Display', Georgia, serif;
+  float: left;
+  font-size: 3.5rem;
+  line-height: 0.8;
+  padding-top: 4px;
+  padding-right: 10px;
+  padding-bottom: 2px;
+  font-weight: 700;
+  color: #111215;
+}
+.dark .drop-cap::first-letter {
+  color: #F5F5F2;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Clean Print Rules */
+@media print {
+  body {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .print\:hidden {
+    display: none !important;
+  }
+}
+

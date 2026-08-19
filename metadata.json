@@ -1,0 +1,6 @@
+{
+  "name": "What's Going On",
+  "description": "The Pulse of India & Global Reality — Premier editorial news platform focusing on Indian national affairs, markets, tech innovation, investigative reporting, and live Google News dispatches.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

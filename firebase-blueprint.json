@@ -1,0 +1,91 @@
+{
+  "entities": {
+    "Article": {
+      "title": "Article",
+      "description": "Editorial or aggregated news article published on What's Going On",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "slug": { "type": "string" },
+        "title": { "type": "string" },
+        "summary": { "type": "string" },
+        "content": { "type": "array", "items": { "type": "string" } },
+        "category": { "type": "string" },
+        "author": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "role": { "type": "string" },
+            "avatar": { "type": "string" }
+          },
+          "required": ["name", "role"]
+        },
+        "publishedAt": { "type": "string" },
+        "updatedAt": { "type": "string" },
+        "readingTime": { "type": "string" },
+        "image": { "type": "string" },
+        "isBreaking": { "type": "boolean" },
+        "isLead": { "type": "boolean" },
+        "isTrending": { "type": "boolean" },
+        "status": { "type": "string", "enum": ["published", "draft", "scheduled", "archived"] },
+        "scheduledAt": { "type": "string" },
+        "views": { "type": "number" },
+        "likes": { "type": "number" },
+        "source": { "type": "string" }
+      },
+      "required": ["id", "title", "summary", "category", "publishedAt", "status"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Registered user or newsroom staff profile",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["Editor-in-Chief", "Senior Editor", "Staff Writer", "Desk Reporter", "Reader"] },
+        "avatar": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "name", "email", "role"]
+    },
+    "UserBookmark": {
+      "title": "UserBookmark",
+      "description": "Bookmarked article saved by a reader",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "articleId": { "type": "string" },
+        "title": { "type": "string" },
+        "category": { "type": "string" },
+        "savedAt": { "type": "string" },
+        "readingTime": { "type": "string" },
+        "image": { "type": "string" },
+        "authorName": { "type": "string" }
+      },
+      "required": ["id", "articleId", "title", "savedAt"]
+    }
+  },
+  "firestore": {
+    "/articles/{articleId}": {
+      "schema": "Article",
+      "description": "Collection of all news articles published or in editorial draft"
+    },
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profiles and editorial team credentials"
+    },
+    "/users/{userId}/bookmarks/{bookmarkId}": {
+      "schema": "UserBookmark",
+      "description": "Reader saved stories and bookmarks"
+    },
+    "/sessions/{sessionId}": {
+      "schema": "EditorialSession",
+      "description": "Active session tokens for newsroom staff"
+    },
+    "/subscribers/{subscriberId}": {
+      "schema": "NewsletterSubscriber",
+      "description": "Verified newsletter email subscribers"
+    }
+  }
+}

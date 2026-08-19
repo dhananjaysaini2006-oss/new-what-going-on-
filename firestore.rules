@@ -1,0 +1,46 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // Articles collection:
+    // Anyone can read articles; writers/editors and news desk can publish and update.
+    match /articles/{articleId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // User profiles & editorial staff
+    match /users/{userId} {
+      allow read: if true;
+      allow write: if true;
+
+      match /bookmarks/{bookmarkId} {
+        allow read, write: if true;
+      }
+    }
+
+    // Editorial Sessions
+    match /sessions/{sessionId} {
+      allow read, write: if true;
+    }
+
+    // Newsletter Subscribers
+    match /subscribers/{subscriberId} {
+      allow read, write: if true;
+    }
+
+    // Test connection doc
+    match /test/{docId} {
+      allow read, write: if true;
+    }
+  }
+}
+
