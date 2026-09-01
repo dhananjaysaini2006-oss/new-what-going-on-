@@ -158,10 +158,12 @@ export default function App() {
       // Gracefully continue with cached/fetched articles
     });
     
-    // Auto-refresh news every 30 seconds
+    // Auto-refresh news every 2.5 minutes (150s) if tab is active
     const interval = setInterval(() => {
-      loadPublicArticles();
-    }, 30000);
+      if (document.visibilityState === 'visible') {
+        loadPublicArticles();
+      }
+    }, 150000);
 
     // Immediate update when mobile user switches back to browser tab or wakes screen
     const handleVisibilityChange = () => {
@@ -223,9 +225,15 @@ export default function App() {
 
       setRoute('public');
 
-      // Check article hash #article/:id or #article/:slug
-      if (hash.startsWith('#article/')) {
-        const identifier = hash.replace('#article/', '');
+      // Check article pathname /article/:slug or hash #article/:id or #article/:slug
+      let identifier = '';
+      if (pathname.startsWith('/article/')) {
+        identifier = decodeURIComponent(pathname.replace('/article/', ''));
+      } else if (hash.startsWith('#article/')) {
+        identifier = decodeURIComponent(hash.replace('#article/', ''));
+      }
+
+      if (identifier) {
         const found = publicArticles.find((a) => a.id === identifier || a.slug === identifier);
         if (found) {
           setCurrentArticle(found);
@@ -258,8 +266,9 @@ export default function App() {
 
   const handleNavigateHome = () => {
     setCurrentArticle(null);
-    window.location.hash = '';
-    navigateTo('public', '/');
+    window.history.pushState({}, '', '/');
+    setRoute('public');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleNavigatePublisher = () => {
@@ -301,7 +310,8 @@ export default function App() {
 
   const handleSelectArticle = (article: Article) => {
     setCurrentArticle(article);
-    window.location.hash = `#article/${article.slug || article.id}`;
+    const slug = article.slug || article.id;
+    window.history.pushState({}, '', `/article/${slug}`);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -316,7 +326,7 @@ export default function App() {
 
   const handleBackToFrontPage = () => {
     setCurrentArticle(null);
-    window.location.hash = '';
+    window.history.pushState({}, '', '/');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -345,7 +355,7 @@ export default function App() {
   };
 
   const handleShareArticle = (article: Article) => {
-    const shareUrl = `${window.location.origin}/#article/${article.slug || article.id}`;
+    const shareUrl = `${window.location.origin}/article/${article.slug || article.id}`;
     if (navigator.share) {
       navigator
         .share({

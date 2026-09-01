@@ -156,18 +156,6 @@ export const Footer: React.FC<FooterProps> = ({ onSelectCategory, onOpenNewslett
             <a href="/rss.xml" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1">
               <Rss className="w-3 h-3 text-[#E63946]" /> RSS
             </a>
-            <a
-              href="/publisher/login"
-              onClick={(e) => {
-                e.preventDefault();
-                window.history.pushState({}, '', '/publisher/login');
-                window.dispatchEvent(new PopStateEvent('popstate'));
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-              className="text-[#4E5460] hover:text-[#A7AAB0] text-[11px] transition-colors"
-            >
-              Staff Portal
-            </a>
           </div>
         </div>
       </div>

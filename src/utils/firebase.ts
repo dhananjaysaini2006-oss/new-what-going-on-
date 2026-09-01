@@ -24,6 +24,8 @@ export async function testFirebaseConnection(): Promise<boolean> {
   } catch (error: any) {
     if (error?.message?.includes('the client is offline')) {
       console.warn('[Firebase] Client is offline or Firestore initializing.');
+    } else if (error?.message?.includes('RESOURCE_EXHAUSTED') || error?.code === 'resource-exhausted') {
+      console.info('[Firebase] Quota limit reached; client running seamlessly with cached local resources.');
     }
     return false;
   }

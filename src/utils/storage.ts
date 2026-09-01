@@ -1,6 +1,4 @@
 import { Article, BookmarkItem } from '../types';
-import { doc, setDoc, deleteDoc } from 'firebase/firestore';
-import { db } from './firebase';
 
 const BOOKMARKS_KEY = 'wgo-bookmarks';
 const NEWSLETTER_KEY = 'wgo-newsletter-subscribed';
@@ -35,13 +33,8 @@ export function saveCustomArticle(article: Article): Article[] {
   }
   try {
     localStorage.setItem(CUSTOM_ARTICLES_KEY, JSON.stringify(updated));
-    // Asynchronously backup to Firestore
-    setDoc(doc(db, 'articles', article.id), {
-      ...article,
-      updatedAt: new Date().toISOString(),
-    }, { merge: true }).catch(() => {});
   } catch (e) {
-    console.error('Error saving custom article', e);
+    console.error('Error saving custom article locally', e);
   }
   return updated;
 }
@@ -51,10 +44,8 @@ export function deleteCustomArticle(id: string): Article[] {
   const updated = current.filter(a => a.id !== id);
   try {
     localStorage.setItem(CUSTOM_ARTICLES_KEY, JSON.stringify(updated));
-    // Asynchronously remove from Firestore
-    deleteDoc(doc(db, 'articles', id)).catch(() => {});
   } catch (e) {
-    console.error('Error deleting custom article', e);
+    console.error('Error deleting custom article locally', e);
   }
   return updated;
 }
@@ -125,11 +116,6 @@ export function setNewsletterSubscribed(email: string): void {
   try {
     localStorage.setItem(NEWSLETTER_KEY, 'true');
     localStorage.setItem('wgo-newsletter-email', email);
-    // Optionally record subscriber in Firestore
-    setDoc(doc(db, 'subscribers', email.replace(/[^a-zA-Z0-9]/g, '_')), {
-      email,
-      subscribedAt: new Date().toISOString(),
-    }, { merge: true }).catch(() => {});
   } catch (e) {
     console.error('Error saving newsletter subscription', e);
   }

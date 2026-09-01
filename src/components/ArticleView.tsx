@@ -65,18 +65,58 @@ export const ArticleView: React.FC<ArticleViewProps> = ({
     return () => window.removeEventListener('scroll', handleScroll);
   }, [article.id]);
 
-  // Dynamically update page title, meta description, and Google News NewsArticle JSON-LD schema
+  // Dynamically update page title, meta description, canonical URL, OpenGraph, and Google News NewsArticle JSON-LD schema
   useEffect(() => {
-    document.title = `${article.seoTitle || article.title} | What’s Going On`;
+    const defaultTitle = "What’s Going On — The Pulse of India & Global Reality";
+    const defaultDesc = "Professional digital news publication covering Indian and global politics, economics, technology, defense, climate, and investigative affairs.";
+    const articleTitle = article.seoTitle || article.title;
+    const articleDesc = article.seoDescription || article.summary;
+    const articleUrl = `${window.location.origin}/article/${article.slug || article.id}`;
+
+    document.title = `${articleTitle} | What’s Going On`;
     
-    // Update meta description
+    // Update / set meta description
     let metaDesc = document.querySelector('meta[name="description"]');
     if (!metaDesc) {
       metaDesc = document.createElement('meta');
       metaDesc.setAttribute('name', 'description');
       document.head.appendChild(metaDesc);
     }
-    metaDesc.setAttribute('content', article.seoDescription || article.summary);
+    metaDesc.setAttribute('content', articleDesc);
+
+    // Canonical link
+    let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.setAttribute('rel', 'canonical');
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute('href', articleUrl);
+
+    // OpenGraph & Twitter tags helper
+    const setMetaTag = (property: string, content: string, isName = false) => {
+      const attr = isName ? 'name' : 'property';
+      let tag = document.querySelector(`meta[${attr}="${property}"]`);
+      if (!tag) {
+        tag = document.createElement('meta');
+        tag.setAttribute(attr, property);
+        document.head.appendChild(tag);
+      }
+      tag.setAttribute('content', content);
+    };
+
+    setMetaTag('og:type', 'article');
+    setMetaTag('og:title', `${articleTitle} | What’s Going On`);
+    setMetaTag('og:description', articleDesc);
+    setMetaTag('og:url', articleUrl);
+    setMetaTag('og:image', article.image || '');
+    setMetaTag('og:site_name', "What's Going On");
+    setMetaTag('article:published_time', article.publishedAt);
+    setMetaTag('article:section', article.category);
+    setMetaTag('twitter:card', 'summary_large_image', true);
+    setMetaTag('twitter:title', `${articleTitle} | What’s Going On`, true);
+    setMetaTag('twitter:description', articleDesc, true);
+    setMetaTag('twitter:image', article.image || '', true);
 
     const scriptId = 'google-news-article-schema';
     let existingScript = document.getElementById(scriptId);
@@ -90,8 +130,8 @@ export const ArticleView: React.FC<ArticleViewProps> = ({
     const schemaData = {
       '@context': 'https://schema.org',
       '@type': 'NewsArticle',
-      headline: article.seoTitle || article.title,
-      description: article.seoDescription || article.summary,
+      headline: articleTitle,
+      description: articleDesc,
       image: [article.image],
       datePublished: article.publishedAt,
       dateModified: article.updatedAt || article.publishedAt,
@@ -100,7 +140,7 @@ export const ArticleView: React.FC<ArticleViewProps> = ({
           '@type': 'Person',
           name: article.author.name,
           jobTitle: article.author.role,
-          url: `${window.location.origin}/#author/${encodeURIComponent(article.author.name)}`,
+          url: `${window.location.origin}/author/${encodeURIComponent(article.author.name)}`,
         },
       ],
       publisher: {
@@ -116,7 +156,7 @@ export const ArticleView: React.FC<ArticleViewProps> = ({
       keywords: (article.tags || []).join(', '),
       mainEntityOfPage: {
         '@type': 'WebPage',
-        '@id': `${window.location.origin}/#article/${article.id}`,
+        '@id': articleUrl,
       },
       articleBody: Array.isArray(article.content) ? article.content.join('\n\n') : article.summary,
     };
@@ -124,6 +164,9 @@ export const ArticleView: React.FC<ArticleViewProps> = ({
     existingScript.textContent = JSON.stringify(schemaData);
 
     return () => {
+      document.title = defaultTitle;
+      if (metaDesc) metaDesc.setAttribute('content', defaultDesc);
+      if (canonical) canonical.setAttribute('href', window.location.origin);
       const s = document.getElementById(scriptId);
       if (s) s.remove();
     };
@@ -456,15 +499,6 @@ export const ArticleView: React.FC<ArticleViewProps> = ({
               </figcaption>
             </figure>
           )}
-
-          {/* Extended editorial paragraphs to simulate profound journalistic depth */}
-          <p className="text-[#111215] dark:text-[#F5F5F2]">
-            As international observers scrutinize the downstream ramifications, several regulatory bodies have initiated bilateral consultations to harmonize audit guidelines. The coming fiscal quarters will serve as the primary testbed for whether these newly implemented standards can resist commercial friction and regional divergence.
-          </p>
-
-          <p className="text-[#111215] dark:text-[#F5F5F2]">
-            For the editorial bureau in Geneva and New York, our correspondents will maintain continuous monitoring as implementation protocols roll out across port authorities, laboratory benchmarks, and regional administrative corridors.
-          </p>
         </div>
 
         {/* Article Tags */}

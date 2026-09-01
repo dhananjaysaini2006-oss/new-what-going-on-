@@ -106,12 +106,14 @@ export const GoogleNewsFeed: React.FC<GoogleNewsFeedProps> = ({
     fetchGoogleNews();
   }, [fetchGoogleNews]);
 
-  // Auto-refresh interval (every 90s if enabled and tab is active)
+  // Auto-refresh interval (every 3 mins if enabled and tab is active)
   useEffect(() => {
     if (!autoRefresh) return;
     const interval = setInterval(() => {
-      fetchGoogleNews();
-    }, 90000);
+      if (document.visibilityState === 'visible') {
+        fetchGoogleNews();
+      }
+    }, 180000);
     return () => clearInterval(interval);
   }, [autoRefresh, fetchGoogleNews]);
 
