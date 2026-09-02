@@ -1846,3 +1846,274 @@
   color: var(--accent-cyan);
 }
 
+/* ==========================================================================
+   COMPREHENSIVE MOBILE OPTIMIZATIONS (<= 768px and <= 480px)
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Cards & Grids */
+  .news-grid-cards {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  
+  .article-card {
+    border-radius: var(--radius-md) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+  }
+  
+  .card-thumb-wrap {
+    min-height: unset !important;
+    aspect-ratio: 16 / 9 !important;
+  }
+  
+  .card-body {
+    padding: 14px 14px 16px !important;
+    gap: 10px !important;
+  }
+  
+  .card-title {
+    font-size: 1.22rem !important;
+    line-height: 1.3 !important;
+  }
+  
+  .card-snippet {
+    font-size: 0.875rem !important;
+    line-height: 1.55 !important;
+    -webkit-line-clamp: 2 !important;
+  }
+
+  .card-footer {
+    padding-top: 10px !important;
+  }
+
+  /* Broadsheet Top Fold */
+  .hindu-top-fold {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+    margin-bottom: 24px !important;
+    padding-bottom: 20px !important;
+  }
+
+  .hindu-lead-image-wrap {
+    height: auto !important;
+    aspect-ratio: 16 / 9 !important;
+    max-height: 220px !important;
+  }
+
+  .hindu-lead-title {
+    font-size: 1.45rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .hindu-dateline-snippet {
+    font-size: 0.925rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .hindu-wire-col {
+    display: flex !important;
+    border-left: none !important;
+    border-right: none !important;
+    padding: 16px 0 !important;
+    border-top: 1px solid var(--border-subtle) !important;
+    gap: 14px !important;
+  }
+
+  .hindu-wire-headline {
+    font-size: 1.05rem !important;
+    line-height: 1.35 !important;
+  }
+
+  .hindu-editorial-col {
+    display: flex !important;
+    border-top: 1px solid var(--border-subtle) !important;
+    padding-top: 16px !important;
+  }
+
+  .hindu-editorial-box {
+    padding: 16px !important;
+  }
+
+  .hindu-section-band {
+    margin-bottom: 28px !important;
+  }
+
+  .hindu-section-bar {
+    margin-bottom: 16px !important;
+    padding-bottom: 8px !important;
+  }
+
+  .hindu-section-title {
+    font-size: 1.25rem !important;
+  }
+
+  /* Compact List View */
+  .compact-item {
+    grid-template-columns: 80px 1fr !important;
+    gap: 12px !important;
+    padding: 10px 12px !important;
+  }
+
+  .compact-thumb {
+    width: 80px !important;
+    height: 64px !important;
+  }
+
+  .compact-title {
+    font-size: 0.95rem !important;
+    line-height: 1.3 !important;
+  }
+
+  /* Market Indices Hub */
+  .market-dashboard-banner {
+    padding: 16px 14px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .market-dashboard-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .market-index-card {
+    padding: 12px 10px !important;
+  }
+
+  .market-index-val {
+    font-size: 1.15rem !important;
+  }
+
+  .market-index-name {
+    font-size: 0.775rem !important;
+  }
+
+  .market-index-change {
+    font-size: 0.75rem !important;
+  }
+
+  /* Reader Modal Full Screen on Mobile */
+  .modal-overlay {
+    padding: 0 !important;
+    align-items: flex-end !important;
+  }
+
+  .reader-modal-container {
+    max-width: 100% !important;
+    width: 100% !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    border-radius: 0 !important;
+    border: none !important;
+  }
+
+  .modal-top-bar {
+    padding: 10px 14px !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+
+  .modal-controls-left {
+    gap: 8px !important;
+  }
+
+  .font-size-adjuster {
+    padding: 1px 4px !important;
+  }
+
+  .modal-scroll-content {
+    padding: 16px 16px 36px !important;
+    gap: 16px !important;
+  }
+
+  .modal-article-title {
+    font-size: 1.45rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .modal-image-wrap {
+    max-height: 220px !important;
+  }
+
+  .modal-article-body {
+    font-size: 1rem !important;
+    line-height: 1.75 !important;
+  }
+
+  .modal-key-points {
+    padding: 14px 16px !important;
+  }
+
+  .modal-footer-bar {
+    padding: 12px 14px !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+
+  .modal-footer-bar > * {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* Modals: Auth, Publish, Admin */
+  .auth-modal-overlay,
+  .publish-modal-overlay,
+  .admin-modal-overlay {
+    padding: 8px !important;
+  }
+
+  .auth-modal-container {
+    max-width: 100% !important;
+    border-radius: var(--radius-md) !important;
+  }
+
+  .auth-modal-header {
+    padding: 14px 16px !important;
+  }
+
+  .auth-modal-body {
+    padding: 18px 16px !important;
+  }
+
+  .publish-modal-container {
+    max-width: 100% !important;
+    height: 94vh !important;
+  }
+
+  .publish-modal-header,
+  .publish-modal-body,
+  .publish-modal-footer {
+    padding: 14px 16px !important;
+  }
+
+  .admin-modal-container {
+    max-width: 100% !important;
+    height: 96vh !important;
+  }
+
+  .admin-modal-header {
+    padding: 14px 16px !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+  }
+
+  .admin-modal-body {
+    padding: 14px !important;
+  }
+
+  .admin-tab-btn {
+    padding: 10px 14px !important;
+    font-size: 0.8rem !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .market-dashboard-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .brand-title {
+    font-size: 1.35rem !important;
+  }
+}
+
+

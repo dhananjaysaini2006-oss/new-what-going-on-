@@ -250,3 +250,67 @@
   display: block;
   animation: fadeInUp 0.2s ease;
 }
+
+/* ==========================================================================
+   MOBILE CURRENT AFFAIRS OPTIMIZATIONS (<= 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .ca-hub-container {
+    padding: 0 !important;
+  }
+  .ca-hero-banner {
+    padding: 20px 16px !important;
+    border-radius: var(--radius-md) !important;
+    margin-bottom: 20px !important;
+  }
+  .ca-banner-title {
+    font-size: 1.45rem !important;
+    line-height: 1.25 !important;
+  }
+  .ca-banner-desc {
+    font-size: 0.875rem !important;
+  }
+  .ca-subtabs {
+    overflow-x: auto !important;
+    padding-bottom: 8px !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    gap: 6px !important;
+  }
+  .ca-subtabs::-webkit-scrollbar {
+    display: none !important;
+  }
+  .ca-subtab-btn {
+    padding: 6px 14px !important;
+    font-size: 0.775rem !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+  }
+  .ca-card {
+    padding: 18px 16px !important;
+    border-radius: var(--radius-md) !important;
+  }
+  .ca-title {
+    font-size: 1.25rem !important;
+    line-height: 1.3 !important;
+  }
+  .ca-analysis-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+  .ca-analysis-box {
+    padding: 12px 14px !important;
+  }
+  .ca-card-footer {
+    flex-direction: column !important;
+    gap: 10px !important;
+    align-items: stretch !important;
+  }
+  .ca-card-footer .audio-player-pill {
+    justify-content: center !important;
+    width: 100% !important;
+  }
+  .ca-quiz-section {
+    padding: 18px 16px !important;
+  }
+}

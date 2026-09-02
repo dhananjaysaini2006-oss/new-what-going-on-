@@ -79,26 +79,26 @@ export class HeaderComponent {
 
     if (mainHeader) {
       mainHeader.innerHTML = `
-        <div class="header-container" style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 14px 0;">
-          <div class="header-left" style="display: flex; align-items: center; gap: 12px;">
+        <div class="header-container">
+          <div class="header-left">
             <div style="font-size: 0.775rem; color: var(--text-muted); font-family: var(--font-sans); text-transform: uppercase; letter-spacing: 0.05em;">
               <strong>National Edition</strong> • Multi-Wire
             </div>
           </div>
 
           <div class="brand-center">
-            <div class="brand-title-wrap" id="btn-brand-home" style="display: flex; align-items: center; justify-content: center; cursor: pointer;">
-              <h1 class="brand-title" style="font-family: var(--font-serif); font-size: 2.85rem; font-weight: 900; letter-spacing: 0.03em; text-transform: uppercase; color: var(--text-primary); margin: 0; line-height: 1;">
+            <div class="brand-title-wrap" id="btn-brand-home">
+              <h1 class="brand-title">
                 WHAT'S GOING ON
               </h1>
             </div>
-            <div class="brand-tagline" style="font-family: var(--font-serif); font-size: 0.8rem; font-style: italic; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-secondary); margin-top: 6px;">
-              India's National Real-Time Editorial & Intelligence Broadsheet
+            <div class="brand-tagline">
+              India's National Real-Time Editorial &amp; Intelligence Broadsheet
             </div>
           </div>
 
-          <div class="header-right" style="display: flex; align-items: center; justify-content: flex-end; gap: 10px;">
-            <div class="search-box-wrapper">
+          <div class="header-right">
+            <div class="search-box-wrapper header-search-desktop">
               <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
@@ -107,12 +107,12 @@ export class HeaderComponent {
             </div>
 
             <!-- User Auth & Admin Panel Widget -->
-            <div id="header-auth-container" style="display: flex; align-items: center; gap: 8px;">
+            <div id="header-auth-container" class="header-auth-desktop">
               <!-- Dynamically populated by updateUserAuthState -->
             </div>
 
             <!-- Write & Publish Story Button (Admin only: hidden by default) -->
-            <button id="btn-open-publish-modal" class="action-btn" title="Write & Publish News Story" style="display: none; align-items: center; gap: 6px; padding: 6px 14px; border-radius: var(--radius-sm); background: var(--hindu-navy); color: #ffffff; font-size: 0.775rem; font-weight: 800; border: 1px solid var(--hindu-navy); cursor: pointer; text-transform: uppercase; letter-spacing: 0.04em;">
+            <button id="btn-open-publish-modal" class="action-btn header-publish-desktop" title="Write &amp; Publish News Story" style="display: none; align-items: center; gap: 6px; padding: 6px 14px; border-radius: var(--radius-sm); background: var(--hindu-navy); color: #ffffff; font-size: 0.775rem; font-weight: 800; border: 1px solid var(--hindu-navy); cursor: pointer; text-transform: uppercase; letter-spacing: 0.04em;">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <path d="M12 20h9"></path>
                 <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
@@ -138,11 +138,22 @@ export class HeaderComponent {
             </button>
 
             <!-- Hamburger: Mobile only -->
-            <button id="btn-hamburger" class="action-btn" title="Navigation Menu" style="display:none;" aria-label="Open navigation menu">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <button id="btn-hamburger" class="action-btn btn-hamburger" title="Navigation Menu" aria-label="Open navigation menu">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
                 <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
               </svg>
             </button>
+          </div>
+
+          <!-- Mobile Full-Width Search Row -->
+          <div class="mobile-search-bar">
+            <div class="search-box-wrapper mobile-search-wrapper">
+              <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="mobile-search-input" class="search-input" placeholder="Search live news, topics, beats..." />
+              <button type="button" id="mobile-search-clear" class="mobile-search-clear" style="display:none;" aria-label="Clear search">✕</button>
+            </div>
           </div>
         </div>
       `;
@@ -159,14 +170,22 @@ export class HeaderComponent {
     const openDrawer = () => {
       if (drawer) drawer.classList.add('open');
       if (overlay) overlay.style.display = 'block';
+      document.body.style.overflow = 'hidden';
     };
     const closeDrawer = () => {
       if (drawer) drawer.classList.remove('open');
       if (overlay) overlay.style.display = 'none';
+      document.body.style.overflow = '';
     };
 
     if (hamburger) hamburger.addEventListener('click', openDrawer);
     if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && drawer && drawer.classList.contains('open')) {
+        closeDrawer();
+      }
+    });
 
     // Populate category links
     const categories = [
@@ -187,9 +206,6 @@ export class HeaderComponent {
         <button
           class="mobile-drawer-cat-btn"
           data-cat="${cat.id}"
-          style="display:block; width:100%; text-align:left; padding:12px 16px; border-radius:var(--radius-md); background:none; border:none; cursor:pointer; font-size:0.95rem; font-weight:600; color:var(--text-primary); transition:background 0.15s ease; font-family:var(--font-sans); margin-bottom:2px;"
-          onmouseover="this.style.background='var(--bg-tertiary)'"
-          onmouseout="this.style.background='none'"
         >${cat.label}</button>
       `).join('');
 
@@ -197,6 +213,10 @@ export class HeaderComponent {
         btn.addEventListener('click', () => {
           const desktopTab = document.querySelector(`.cat-tab[data-category="${btn.dataset.cat}"]`);
           if (desktopTab) desktopTab.click();
+          
+          drawerCats.querySelectorAll('.mobile-drawer-cat-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
           closeDrawer();
           window.scrollTo({ top: 0, behavior: 'smooth' });
         });
@@ -438,6 +458,76 @@ export class HeaderComponent {
         }
       }
     }
+
+    // --- Mobile Drawer Auth State Synchronization ---
+    const drawerAuth = document.getElementById('mobile-drawer-auth');
+    if (drawerAuth) {
+      if (!user) {
+        drawerAuth.innerHTML = `
+          <div style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
+            <button id="btn-drawer-signin" class="btn-drawer-auth-primary">Sign In to Newsroom</button>
+            <button id="btn-drawer-signup" class="btn-drawer-auth-secondary">Create Free Account</button>
+          </div>
+        `;
+        drawerAuth.querySelector('#btn-drawer-signin')?.addEventListener('click', () => {
+          document.getElementById('mobile-nav-drawer')?.classList.remove('open');
+          const ov = document.getElementById('mobile-drawer-overlay');
+          if (ov) ov.style.display = 'none';
+          document.body.style.overflow = '';
+          if (this.onAuthClickCallback) this.onAuthClickCallback('signin');
+        });
+        drawerAuth.querySelector('#btn-drawer-signup')?.addEventListener('click', () => {
+          document.getElementById('mobile-nav-drawer')?.classList.remove('open');
+          const ov = document.getElementById('mobile-drawer-overlay');
+          if (ov) ov.style.display = 'none';
+          document.body.style.overflow = '';
+          if (this.onAuthClickCallback) this.onAuthClickCallback('signup');
+        });
+      } else {
+        drawerAuth.innerHTML = `
+          <div style="display: flex; flex-direction: column; gap: 10px; width: 100%;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <div class="user-avatar-badge ${isAdmin ? 'admin-glow' : ''}">
+                ${isAdmin ? '👑' : '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>'}
+              </div>
+              <div>
+                <div style="font-weight: 700; color: var(--text-primary); font-size: 0.9rem;">${user.displayName || user.email.split('@')[0]}</div>
+                <div class="user-role-badge ${isAdmin ? 'role-admin' : 'role-reader'}" style="display: inline-block;">${isAdmin ? 'SUPER ADMIN' : 'READER'}</div>
+              </div>
+            </div>
+            ${isAdmin ? `
+              <button id="btn-drawer-write" class="btn-drawer-admin-action">✍️ Write &amp; Publish Story</button>
+              <button id="btn-drawer-admin" class="btn-drawer-admin-action">🛡️ Executive Admin Suite</button>
+            ` : ''}
+            <button id="btn-drawer-signout" class="btn-drawer-signout">Sign Out</button>
+          </div>
+        `;
+        if (isAdmin) {
+          drawerAuth.querySelector('#btn-drawer-write')?.addEventListener('click', () => {
+            document.getElementById('mobile-nav-drawer')?.classList.remove('open');
+            const ov = document.getElementById('mobile-drawer-overlay');
+            if (ov) ov.style.display = 'none';
+            document.body.style.overflow = '';
+            if (this.onPublishClickCallback) this.onPublishClickCallback();
+          });
+          drawerAuth.querySelector('#btn-drawer-admin')?.addEventListener('click', () => {
+            document.getElementById('mobile-nav-drawer')?.classList.remove('open');
+            const ov = document.getElementById('mobile-drawer-overlay');
+            if (ov) ov.style.display = 'none';
+            document.body.style.overflow = '';
+            if (this.onAdminClickCallback) this.onAdminClickCallback();
+          });
+        }
+        drawerAuth.querySelector('#btn-drawer-signout')?.addEventListener('click', async () => {
+          document.getElementById('mobile-nav-drawer')?.classList.remove('open');
+          const ov = document.getElementById('mobile-drawer-overlay');
+          if (ov) ov.style.display = 'none';
+          document.body.style.overflow = '';
+          const { firebaseService } = await import('../services/firebaseService.js');
+          await firebaseService.signOut();
+        });
+      }
+    }
   }
 
   attachEventListeners() {
@@ -467,30 +557,72 @@ export class HeaderComponent {
       });
     }
 
-    // Search input
+    // Desktop search input
     const searchInput = document.getElementById('global-search-input');
+    const mobileSearchInput = document.getElementById('mobile-search-input');
+    const mobileSearchClear = document.getElementById('mobile-search-clear');
+
     if (searchInput) {
       let debounceTimer = null;
       searchInput.addEventListener('input', (e) => {
+        const val = e.target.value;
+        if (mobileSearchInput && mobileSearchInput.value !== val) {
+          mobileSearchInput.value = val;
+          if (mobileSearchClear) mobileSearchClear.style.display = val ? 'inline-flex' : 'none';
+        }
         clearTimeout(debounceTimer);
         debounceTimer = setTimeout(() => {
-          if (this.onSearchCallback) this.onSearchCallback(e.target.value.trim());
+          if (this.onSearchCallback) this.onSearchCallback(val.trim());
         }, 250);
       });
 
       // Keyboard shortcut '/'
       window.addEventListener('keydown', (e) => {
-        if (e.key === '/' && document.activeElement !== searchInput) {
+        if (e.key === '/' && document.activeElement !== searchInput && document.activeElement !== mobileSearchInput) {
           e.preventDefault();
-          searchInput.focus();
+          if (window.innerWidth <= 900 && mobileSearchInput) {
+            mobileSearchInput.focus();
+          } else {
+            searchInput.focus();
+          }
         }
       });
+    }
+
+    // Mobile full-width search input
+    if (mobileSearchInput) {
+      let mobileDebounce = null;
+      mobileSearchInput.addEventListener('input', (e) => {
+        const val = e.target.value;
+        if (mobileSearchClear) {
+          mobileSearchClear.style.display = val.length > 0 ? 'inline-flex' : 'none';
+        }
+        if (searchInput && searchInput.value !== val) {
+          searchInput.value = val;
+        }
+        clearTimeout(mobileDebounce);
+        mobileDebounce = setTimeout(() => {
+          if (this.onSearchCallback) this.onSearchCallback(val.trim());
+        }, 250);
+      });
+
+      if (mobileSearchClear) {
+        mobileSearchClear.addEventListener('click', () => {
+          mobileSearchInput.value = '';
+          mobileSearchClear.style.display = 'none';
+          if (searchInput) searchInput.value = '';
+          if (this.onSearchCallback) this.onSearchCallback('');
+        });
+      }
     }
 
     // Brand click returns to home
     const brandHome = document.getElementById('btn-brand-home');
     if (brandHome) {
       brandHome.addEventListener('click', () => {
+        if (searchInput) searchInput.value = '';
+        if (mobileSearchInput) mobileSearchInput.value = '';
+        if (mobileSearchClear) mobileSearchClear.style.display = 'none';
         if (this.onSearchCallback) this.onSearchCallback('');
         const allTab = document.querySelector('.cat-tab[data-category="all"]');
         if (allTab) allTab.click();
