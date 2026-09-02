@@ -817,23 +817,119 @@
 }
 
 /* ==========================================================================
+   BREAKING BROADCAST ALERT BANNER
+   ========================================================================== */
+.admin-breaking-alert-banner {
+  background: linear-gradient(90deg, #990000 0%, #cc0000 100%);
+  color: #ffffff;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(153, 0, 0, 0.25);
+  position: relative;
+  z-index: 999;
+  text-align: center;
+  width: 100%;
+}
+
+.breaking-banner-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.breaking-banner-tag {
+  background: #ffffff;
+  color: #990000;
+  padding: 2px 8px;
+  border-radius: 2px;
+  font-size: 0.725rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.breaking-banner-text {
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.breaking-banner-close {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  opacity: 0.8;
+  font-size: 1.2rem;
+  padding: 0 6px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .admin-breaking-alert-banner {
+    padding: 6px 12px !important;
+    position: relative !important;
+  }
+  .breaking-banner-inner {
+    gap: 8px !important;
+    flex-wrap: wrap !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+  }
+  .breaking-banner-text {
+    font-size: 0.775rem !important;
+    flex: 1 1 auto !important;
+  }
+}
+
+/* ==========================================================================
    HERO 3-COLUMN RESPONSIVE BREAKPOINTS
    ========================================================================== */
-@media (max-width: 1200px) {
+@media (max-width: 1200px) and (min-width: 769px) {
   .hindu-top-fold {
+    display: grid !important;
     grid-template-columns: 1fr 1fr !important;
   }
   .hindu-editorial-col {
-    display: none;
+    grid-column: span 2 !important;
   }
 }
 
 @media (max-width: 768px) {
   .hindu-top-fold {
-    grid-template-columns: 1fr !important;
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
     gap: 20px !important;
     margin-bottom: 24px !important;
     padding-bottom: 20px !important;
+  }
+  .hindu-lead-col,
+  .hindu-wire-col,
+  .hindu-editorial-col {
+    width: 100% !important;
+    max-width: 100% !important;
+    grid-column: auto !important;
+    flex: 1 1 100% !important;
+  }
+  .hindu-lead-image-wrap {
+    height: auto !important;
+    aspect-ratio: 16 / 9 !important;
+    max-height: 220px !important;
+    width: 100% !important;
+  }
+  .hindu-lead-title {
+    font-size: 1.4rem !important;
+    line-height: 1.25 !important;
+  }
+  .hindu-dateline-snippet {
+    font-size: 0.925rem !important;
+    line-height: 1.55 !important;
   }
   .hindu-wire-col {
     display: flex !important;
@@ -841,17 +937,24 @@
     border-right: none !important;
     padding: 16px 0 !important;
     border-top: 1px solid var(--border-subtle) !important;
+    border-bottom: 1px solid var(--border-subtle) !important;
     gap: 14px !important;
   }
   .hindu-wire-headline {
     font-size: 1.05rem !important;
+    line-height: 1.35 !important;
   }
   .hindu-editorial-col {
     display: flex !important;
-    border-top: 1px solid var(--border-subtle) !important;
-    padding-top: 16px !important;
+    border-top: none !important;
+    padding-top: 0 !important;
+  }
+  .hindu-editorial-box {
+    padding: 16px !important;
+    width: 100% !important;
   }
 }
+
 
 /* ==========================================================================
    COMPACT LIST VIEW MOBILE FIX

@@ -283,28 +283,15 @@ class NewsApp {
 
     const banner = document.createElement('div');
     banner.id = 'admin-breaking-alert-banner';
-    banner.style.cssText = `
-      background: linear-gradient(90deg, #990000 0%, #cc0000 100%);
-      color: #ffffff;
-      padding: 10px 20px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      box-shadow: 0 4px 12px rgba(153, 0, 0, 0.25);
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      text-align: center;
-    `;
+    banner.className = 'admin-breaking-alert-banner';
     banner.innerHTML = `
-      <span style="background: #ffffff; color: #990000; padding: 2px 8px; border-radius: 2px; font-size: 0.725rem; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase;">
-        🔴 BREAKING BROADCAST
-      </span>
-      <span>${alertObj.text}</span>
-      <button id="btn-close-alert-banner" style="background: none; border: none; color: #fff; cursor: pointer; opacity: 0.8; font-size: 1.1rem; padding: 0 4px;" title="Dismiss banner">&times;</button>
+      <div class="breaking-banner-inner">
+        <span class="breaking-banner-tag">
+          🔴 BREAKING BROADCAST
+        </span>
+        <span class="breaking-banner-text">${alertObj.text}</span>
+        <button id="btn-close-alert-banner" class="breaking-banner-close" title="Dismiss banner">&times;</button>
+      </div>
     `;
 
     document.body.prepend(banner);
