@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WHAT'S GOING ON — Premium Real-Time News & Intelligence Portal</title>
+  
+  <meta name="description" content="What's Going On is a minimalist, ultra-fast news intelligence portal aggregating real-time updates from Google News, Indian media houses, and international publications with 3-minute auto-refresh and dedicated Current Affairs." />
+  <meta name="keywords" content="What's Going On, News Portal, Google News, India News, The Hindu, NDTV, Times of India, BBC, Reuters, Current Affairs, 3 minute auto update, UPSC Current Affairs" />
+  <meta name="theme-color" content="#07090e" />
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="WHAT'S GOING ON — Global News & Current Affairs Hub" />
+  <meta property="og:description" content="Live synchronized news portal updating every 3 minutes across Google News, India Media, and Global publications." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <script type="module" crossorigin src="/assets/index-BU8gFQTp.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-D_QBrBkI.css">
+</head>
+<body>
+  <!-- Hidden Global SVG Defs -->
+  <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#00f0ff" />
+        <stop offset="50%" stop-color="#3b82f6" />
+        <stop offset="100%" stop-color="#8b5cf6" />
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <!-- Top Utility Bar: Live Time, Global Markets, Auto-Refresh Status -->
+  <header id="top-utility-bar" class="top-bar"></header>
+
+  <!-- Main Editorial Header: Brand, Search, Theme & Bookmark controls -->
+  <header id="main-header" class="main-header"></header>
+
+  <!-- Breaking News Marquee Ticker -->
+  <div id="breaking-news-ticker-container"></div>
+
+  <!-- Sticky Category Navigation Bar -->
+  <nav id="sticky-nav-bar" class="sticky-nav-bar" aria-label="Main Categories">
+    <div class="nav-container">
+      <div class="category-tabs" id="category-tabs-nav">
+        <!-- Injected dynamically via app.js -->
+      </div>
+
+      <div class="nav-right-controls">
+        <select id="select-source-filter" class="source-filter-select" aria-label="Filter by Publication Source">
+          <option value="all">All Outlets & Feeds</option>
+        </select>
+
+        <div class="view-toggle-btns" title="Switch Display Layout">
+          <button id="btn-view-grid" class="view-btn active" title="Magazine Grid View">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+          </button>
+          <button id="btn-view-list" class="view-btn" title="Compact List View">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line>
+              <line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line>
+              <line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Portal Layout -->
+  <main class="main-layout-container">
+    <!-- Main Dynamic Feed Area -->
+    <section class="main-feed-area" id="main-news-feed" aria-live="polite">
+      <!-- Injected via newsGrid or currentAffairs components -->
+    </section>
+
+    <!-- Right Sticky Intelligence Sidebar -->
+    <aside class="sidebar-area" id="main-sidebar" aria-label="Sidebar Widgets">
+      <!-- Injected via app.js -->
+    </aside>
+  </main>
+
+  <!-- Editorial Footer -->
+  <footer class="portal-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <h3>WHAT'S GOING ON</h3>
+        <p>A high-velocity global intelligence and real-time news aggregator. Automatically synchronizing multi-source wire feeds every 3 minutes.</p>
+        <div style="display: flex; gap: 8px; font-size: 0.75rem; color: var(--text-muted);">
+          <span class="badge badge-live">LIVE WIRE</span>
+          <span class="badge badge-source">MULTI-OUTLET SYNC</span>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Indian Outlets</h4>
+        <ul>
+          <li><a href="https://www.thehindu.com" target="_blank" rel="noopener">The Hindu</a></li>
+          <li><a href="https://ndtv.com" target="_blank" rel="noopener">NDTV 24x7</a></li>
+          <li><a href="https://timesofindia.indiatimes.com" target="_blank" rel="noopener">Times of India</a></li>
+          <li><a href="https://indianexpress.com" target="_blank" rel="noopener">The Indian Express</a></li>
+          <li><a href="https://livemint.com" target="_blank" rel="noopener">Livemint Business</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Global Wire</h4>
+        <ul>
+          <li><a href="https://news.google.com" target="_blank" rel="noopener">Google News World</a></li>
+          <li><a href="https://bbc.com/news" target="_blank" rel="noopener">BBC World News</a></li>
+          <li><a href="https://aljazeera.com" target="_blank" rel="noopener">Al Jazeera</a></li>
+          <li><a href="https://theguardian.com" target="_blank" rel="noopener">The Guardian</a></li>
+          <li><a href="https://techcrunch.com" target="_blank" rel="noopener">TechCrunch</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Intelligence &amp; Study</h4>
+        <ul>
+          <li><a href="#" onclick="event.preventDefault(); document.querySelector('.cat-tab[data-category=current-affairs]')?.click(); window.scrollTo({top:0,behavior:'smooth'});">Daily Current Affairs</a></li>
+          <li><a href="#" onclick="event.preventDefault(); document.querySelector('.cat-tab[data-category=saved]')?.click(); window.scrollTo({top:0,behavior:'smooth'});">Saved Bookmarks</a></li>
+          <li><a href="#" onclick="event.preventDefault(); document.querySelector('.cat-tab[data-category=business]')?.click(); window.scrollTo({top:0,behavior:'smooth'});">Market Intelligence</a></li>
+          <li><a href="https://upsc.gov.in" target="_blank" rel="noopener">UPSC Official Site</a></li>
+          <li><a href="#" onclick="event.preventDefault(); document.querySelector('#btn-bookmarks-view')?.click();">Reading List</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 <strong>WHAT'S GOING ON</strong>. All wire rights belong to their respective publications.</span>
+      <span>Engineered with Precision & Minimalist Design.</span>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <!-- Mobile Drawer Overlay -->
+  <div id="mobile-drawer-overlay" style="display:none; position:fixed; inset:0; z-index:2000; background:rgba(0,0,0,0.7); backdrop-filter:blur(8px);" onclick="document.getElementById('mobile-nav-drawer').classList.remove('open'); this.style.display='none';"></div>
+
+  <!-- Mobile Navigation Drawer -->
+  <nav id="mobile-nav-drawer" style="position:fixed; top:0; right:0; height:100vh; width:min(320px, 90vw); background:var(--bg-secondary); border-left:1px solid var(--border-medium); z-index:2001; transform:translateX(100%); transition:transform 0.3s cubic-bezier(0.16,1,0.3,1); overflow-y:auto; display:flex; flex-direction:column; padding:0;">
+    <div style="display:flex; align-items:center; justify-content:space-between; padding:18px 20px; border-bottom:1px solid var(--border-subtle);">
+      <span style="font-family:var(--font-serif); font-weight:800; font-size:1.1rem; color:var(--text-primary);">WHAT'S GOING ON</span>
+      <button id="btn-mobile-drawer-close" style="background:none; border:none; cursor:pointer; color:var(--text-muted); padding:4px;" aria-label="Close menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div id="mobile-drawer-categories" style="padding:12px 8px; flex:1;"></div>
+    <div style="padding:16px 20px; border-top:1px solid var(--border-subtle); display:flex; align-items:center; gap:10px;" id="mobile-drawer-auth"></div>
+  </nav>
+
+  <!-- Entry Script -->
+</body>
+</html>

@@ -1,0 +1,252 @@
+/* ==========================================================================
+   CURRENT AFFAIRS INTELLIGENCE HUB STYLES
+   ========================================================================== */
+
+.ca-hub-container {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ca-hero-banner {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(99, 102, 241, 0.15) 50%, rgba(0, 240, 255, 0.08) 100%);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.ca-hero-banner::after {
+  content: 'CURRENT AFFAIRS';
+  position: absolute;
+  right: -20px;
+  bottom: -20px;
+  font-size: 5rem;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.03);
+  font-family: var(--font-sans);
+  pointer-events: none;
+}
+
+.ca-banner-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.ca-badge {
+  background: var(--gradient-gold);
+  color: #000;
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ca-banner-date {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--accent-amber);
+}
+
+.ca-banner-title {
+  font-family: var(--font-serif);
+  font-size: 2.3rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.ca-banner-desc {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  max-width: 780px;
+  line-height: 1.65;
+}
+
+/* CA Filter Tabs */
+.ca-subtabs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: none;
+}
+
+.ca-subtab-btn {
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.ca-subtab-btn:hover, .ca-subtab-btn.active {
+  background: var(--accent-amber);
+  color: #000;
+  border-color: var(--accent-amber);
+}
+
+/* Structured Briefing Card */
+.ca-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 28px 30px;
+  transition: all var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.ca-card:hover {
+  border-color: rgba(245, 158, 11, 0.4);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
+  transform: translateY(-3px);
+}
+
+.ca-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ca-category-pill {
+  font-size: 0.775rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.ca-cat-national { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); }
+.ca-cat-international { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
+.ca-cat-economy { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+.ca-cat-defense { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+.ca-cat-awards { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+
+.ca-title {
+  font-family: var(--font-serif);
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.35;
+}
+
+/* 4-Box Structured Analysis Grid (Who, What, Why, Impact) */
+.ca-analysis-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-top: 6px;
+}
+
+.ca-analysis-box {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 16px 18px;
+}
+
+.ca-box-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.label-what { color: var(--accent-cyan); }
+.label-why { color: var(--accent-amber); }
+.label-impact { color: var(--accent-emerald); }
+.label-facts { color: var(--accent-indigo); }
+
+.ca-box-text {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.ca-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Quick Quiz / Flashcards Section */
+.ca-quiz-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-top: 16px;
+}
+
+.ca-quiz-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.quiz-card {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  margin-bottom: 14px;
+  transition: all var(--transition-fast);
+}
+
+.quiz-question {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.quiz-reveal-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.775rem;
+  color: var(--accent-cyan);
+  cursor: pointer;
+}
+
+.quiz-answer {
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: rgba(16, 185, 129, 0.1);
+  border-left: 3px solid var(--accent-emerald);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  display: none;
+}
+
+.quiz-answer.show {
+  display: block;
+  animation: fadeInUp 0.2s ease;
+}
