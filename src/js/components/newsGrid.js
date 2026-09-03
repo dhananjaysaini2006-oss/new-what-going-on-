@@ -189,7 +189,7 @@ export class NewsGridComponent {
         <div class="hindu-lead-col" data-id="${leadArticle.id}">
           <div class="hindu-lead-image-wrap">
             <img src="${leadArticle.image}" alt="${leadArticle.title}" class="hindu-lead-img" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&auto=format&fit=crop&q=80'" />
-            <div style="position: absolute; top: 14px; left: 14px; z-index: 2; display: flex; gap: 8px;">
+            <div class="hindu-lead-badges">
               <span class="badge badge-live">● TOP LEAD STORY</span>
               <span class="badge badge-source">${leadArticle.source}</span>
             </div>
@@ -366,7 +366,7 @@ export class NewsGridComponent {
       <div class="hero-story-card animate-fade-in" data-id="${heroArticle.id}">
         <div class="hero-image-wrap">
           <img src="${heroArticle.image}" alt="${heroArticle.title}" class="hero-img" loading="eager" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=900&auto=format&fit=crop&q=80'" />
-          <div style="position: absolute; top: 18px; left: 18px; z-index: 2; display: flex; gap: 8px;">
+          <div class="hero-image-badges">
             <span class="badge ${isIndian ? 'badge-live' : 'badge-source'}">${customBadgeText}</span>
             <span class="badge badge-category">${heroArticle.source}</span>
           </div>

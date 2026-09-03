@@ -31,40 +31,40 @@ export class HeaderComponent {
     if (topBar) {
       topBar.innerHTML = `
         <div class="top-bar-inner">
-          <div class="top-bar-left" style="display: flex; align-items: center; gap: 14px;">
-            <div class="live-time-display" style="display: flex; align-items: center; gap: 8px; font-size: 0.8rem; font-family: var(--font-sans);">
-              <span style="font-weight: 700; color: var(--text-primary);" id="current-clock-date">Loading date...</span>
-              <span style="color: var(--text-muted);">|</span>
-              <span style="color: var(--text-secondary);">New Delhi Edition</span>
-              <span style="color: var(--text-muted);">|</span>
-              <a href="#hindu-top" style="color: var(--hindu-red); font-weight: 700; text-decoration: none; font-size: 0.775rem; letter-spacing: 0.05em;">e-Paper</a>
-              <span style="color: var(--text-muted);">|</span>
-              <div id="topbar-auth-pill" style="display: inline-flex; align-items: center;"></div>
-              <span style="color: var(--text-muted);">|</span>
-              <span class="badge badge-live" style="font-size: 0.675rem; padding: 2px 6px;">● LIVE WIRE</span>
+          <div class="top-bar-left">
+            <div class="live-time-display">
+              <span id="current-clock-date" class="topbar-chip date-chip">Loading date...</span>
+              <span class="topbar-divider">|</span>
+              <span class="topbar-chip edition-chip">New Delhi Edition</span>
+              <span class="topbar-divider">|</span>
+              <a href="#hindu-top" class="topbar-chip epaper-chip">e-Paper</a>
+              <span class="topbar-divider">|</span>
+              <div id="topbar-auth-pill" class="topbar-auth-pill"></div>
+              <span class="topbar-divider">|</span>
+              <span class="badge badge-live topbar-chip live-chip">● LIVE WIRE</span>
             </div>
           </div>
 
-          <div class="top-bar-right" style="display: flex; align-items: center; gap: 16px;">
-            <div class="weather-snippet" style="display: flex; align-items: center; gap: 6px; font-size: 0.775rem; color: var(--text-secondary);">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2">
+          <div class="top-bar-right">
+            <div class="weather-snippet topbar-chip">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2">
                 <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
               </svg>
               <span><strong>New Delhi</strong> 28°C</span>
             </div>
 
-            <div style="display: flex; align-items: center; gap: 6px; font-size: 0.725rem; font-family: var(--font-mono); color: var(--accent-emerald);">
-              <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-emerald); box-shadow: 0 0 6px var(--accent-emerald);"></span>
+            <div class="sync-status-indicator topbar-chip">
+              <span class="sync-status-dot"></span>
               <span id="last-sync-time">Synced: Just now</span>
             </div>
 
-            <div class="refresh-countdown-widget" title="Auto-synchronizes news every 3 minutes">
+            <div class="refresh-countdown-widget topbar-chip" title="Auto-synchronizes news every 3 minutes">
               <svg class="countdown-progress-circle" viewBox="0 0 20 20">
                 <circle class="circle-bg" cx="10" cy="10" r="7"></circle>
                 <circle id="countdown-circle-bar" class="circle-progress" cx="10" cy="10" r="7"></circle>
               </svg>
-              <span style="font-size: 0.725rem; color: var(--text-muted); font-weight: 600;">NEXT SYNC:</span>
-              <span class="refresh-text" id="countdown-text" style="font-family: var(--font-mono); font-weight: 700; color: var(--text-primary);">03:00</span>
+              <span class="countdown-label">NEXT SYNC:</span>
+              <span class="refresh-text" id="countdown-text">03:00</span>
               <button id="btn-header-refresh" class="btn-manual-refresh" title="Synchronize News Now">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
