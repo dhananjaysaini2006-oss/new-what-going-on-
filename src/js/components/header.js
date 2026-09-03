@@ -35,6 +35,8 @@ export class HeaderComponent {
             <div class="live-time-display">
               <span id="current-clock-date" class="topbar-chip date-chip">Loading date...</span>
               <span class="topbar-divider">|</span>
+              <button id="topbar-btn-publish" class="topbar-chip publish-chip" style="color: #10b981; font-weight: 700; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.25); cursor: pointer;" title="Write and publish an article">✍️ Publish Article</button>
+              <span class="topbar-divider">|</span>
               <span class="topbar-chip edition-chip">New Delhi Edition</span>
               <span class="topbar-divider">|</span>
               <a href="#hindu-top" class="topbar-chip epaper-chip">e-Paper</a>
@@ -111,13 +113,13 @@ export class HeaderComponent {
               <!-- Dynamically populated by updateUserAuthState -->
             </div>
 
-            <!-- Write & Publish Story Button (Admin only: hidden by default) -->
-            <button id="btn-open-publish-modal" class="action-btn header-publish-desktop" title="Write &amp; Publish News Story" style="display: none; align-items: center; gap: 6px; padding: 6px 14px; border-radius: var(--radius-sm); background: var(--hindu-navy); color: #ffffff; font-size: 0.775rem; font-weight: 800; border: 1px solid var(--hindu-navy); cursor: pointer; text-transform: uppercase; letter-spacing: 0.04em;">
+            <!-- Write & Publish Story Button -->
+            <button id="btn-open-publish-modal" class="action-btn header-publish-btn" title="Write &amp; Publish News Article">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <path d="M12 20h9"></path>
                 <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
               </svg>
-              <span>✍️ Write Story</span>
+              <span>Publish</span>
             </button>
 
             <button id="btn-bookmarks-view" class="action-btn" title="Saved Bookmarks">
@@ -198,16 +200,32 @@ export class HeaderComponent {
       { id: 'current-affairs', label: '⭐ Current Affairs Hub' },
       { id: 'tech', label: '🤖 Tech & AI' },
       { id: 'science', label: '🚀 Science & Defense' },
+      { id: 'published', label: '✍️ Community & Published' },
       { id: 'saved', label: '🔖 Saved Stories' },
     ];
 
     if (drawerCats) {
-      drawerCats.innerHTML = categories.map(cat => `
+      drawerCats.innerHTML = `
+        <div style="padding: 0 0 12px; border-bottom: 1px solid var(--border-subtle); margin-bottom: 10px;">
+          <button id="btn-mobile-drawer-publish-cta" class="mobile-drawer-publish-cta">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M12 20h9"></path>
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+            </svg>
+            <span>✍️ Write &amp; Publish Article</span>
+          </button>
+        </div>
+      ` + categories.map(cat => `
         <button
           class="mobile-drawer-cat-btn"
           data-cat="${cat.id}"
         >${cat.label}</button>
       `).join('');
+
+      drawerCats.querySelector('#btn-mobile-drawer-publish-cta')?.addEventListener('click', () => {
+        closeDrawer();
+        if (this.onPublishClickCallback) this.onPublishClickCallback();
+      });
 
       drawerCats.querySelectorAll('.mobile-drawer-cat-btn').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -343,11 +361,9 @@ export class HeaderComponent {
     const topbarPill = document.getElementById('topbar-auth-pill');
     const publishBtn = document.getElementById('btn-open-publish-modal');
 
-    const isAdmin = user && (user.role === 'admin' || (user.email && user.email.toLowerCase() === 'dhananjaysaini2006@gmail.com'));
-
-    // RESTRICTED: Admin can see 'Write Story', regular users and guests CANNOT see it.
+    // Publish Story button available for all contributors & readers
     if (publishBtn) {
-      publishBtn.style.display = isAdmin ? 'inline-flex' : 'none';
+      publishBtn.style.display = 'inline-flex';
     }
 
     if (!user) {
@@ -633,6 +649,14 @@ export class HeaderComponent {
     const publishBtn = document.getElementById('btn-open-publish-modal');
     if (publishBtn) {
       publishBtn.addEventListener('click', () => {
+        if (this.onPublishClickCallback) this.onPublishClickCallback();
+      });
+    }
+
+    const topbarPublish = document.getElementById('topbar-btn-publish');
+    if (topbarPublish) {
+      topbarPublish.addEventListener('click', (e) => {
+        e.preventDefault();
         if (this.onPublishClickCallback) this.onPublishClickCallback();
       });
     }

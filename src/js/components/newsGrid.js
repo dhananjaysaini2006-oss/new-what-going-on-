@@ -40,6 +40,27 @@ export class NewsGridComponent {
 
     if (!articles || articles.length === 0) {
       const isBookmarks = options.category === 'saved';
+      const isPublished = options.category === CATEGORIES.PUBLISHED;
+
+      if (isPublished) {
+        feedContainer.innerHTML = `
+          <div class="empty-state-premium">
+            <div class="empty-state-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 20h9"></path>
+                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+              </svg>
+            </div>
+            <h3>No community articles published yet</h3>
+            <p>Publish breaking news, investigation reports, or analysis pieces live to What's Going On.</p>
+            <button class="empty-state-cta" id="btn-empty-publish-cta" onclick="document.getElementById('btn-open-publish-modal')?.click()">
+              ✍️ Write &amp; Publish Article &rarr;
+            </button>
+          </div>
+        `;
+        return;
+      }
+
       feedContainer.innerHTML = isBookmarks
         ? `<div class="empty-state-premium">
             <div class="empty-state-icon">
@@ -95,6 +116,7 @@ export class NewsGridComponent {
     else if (category === CATEGORIES.BUSINESS) sectionTitle = '📊 Global & Indian Business Wire';
     else if (category === CATEGORIES.GOOGLE_NEWS) sectionTitle = '🌐 Google News Live Wire';
     else if (category === CATEGORIES.SAVED) sectionTitle = '🔖 Saved Bookmarks';
+    else if (category === CATEGORIES.PUBLISHED) sectionTitle = '✍️ Community & Published Articles';
     else sectionTitle = `${category.toUpperCase()} Wire`;
 
     feedContainer.innerHTML = `

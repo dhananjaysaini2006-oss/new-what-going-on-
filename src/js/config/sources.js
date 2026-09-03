@@ -8,7 +8,8 @@ export const CATEGORIES = {
   BUSINESS: 'business',
   TECH: 'tech',
   SCIENCE: 'science',
-  SAVED: 'saved'
+  SAVED: 'saved',
+  PUBLISHED: 'published'
 };
 
 export const SOURCE_REGISTRY = [

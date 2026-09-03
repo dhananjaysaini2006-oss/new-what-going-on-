@@ -1261,3 +1261,76 @@ select:focus-visible {
   border-top: 1px solid var(--border-subtle);
 }
 
+/* ==========================================================================
+   ARTICLE PUBLISHING UI ENHANCEMENTS
+   ========================================================================== */
+.header-publish-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 6px 14px !important;
+  border-radius: var(--radius-full) !important;
+  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%) !important;
+  color: #ffffff !important;
+  font-size: 0.775rem !important;
+  font-weight: 800 !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  cursor: pointer !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25) !important;
+  transition: all var(--transition-fast) !important;
+}
+
+.header-publish-btn:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4) !important;
+  filter: brightness(1.1) !important;
+}
+
+.cat-tab-publish {
+  background: rgba(16, 185, 129, 0.1) !important;
+  color: #10b981 !important;
+  border: 1px dashed rgba(16, 185, 129, 0.4) !important;
+  font-weight: 700 !important;
+  transition: all var(--transition-fast) !important;
+}
+
+.cat-tab-publish:hover {
+  background: #10b981 !important;
+  color: #ffffff !important;
+  border-style: solid !important;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.mobile-drawer-publish-cta {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+}
+
+.mobile-drawer-publish-cta:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .header-publish-btn {
+    display: none !important;
+  }
+}
+

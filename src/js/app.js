@@ -190,17 +190,31 @@ class NewsApp {
       { id: CATEGORIES.CURRENT_AFFAIRS, label: '⭐ Current Affairs Hub', highlight: true },
       { id: CATEGORIES.TECH, label: '🤖 Tech & AI' },
       { id: CATEGORIES.SCIENCE, label: '🚀 Science & Defense' },
+      { id: CATEGORIES.PUBLISHED, label: '✍️ Community & Published' },
       { id: CATEGORIES.SAVED, label: '🔖 Saved Stories' }
     ];
 
     if (tabsContainer) {
-      tabsContainer.innerHTML = categoriesList.map(cat => `
+      const tabsHtml = categoriesList.map(cat => `
         <button class="cat-tab ${cat.id === this.currentCategory ? 'active' : ''} ${cat.highlight ? 'highlight-ca' : ''}" data-category="${cat.id}">
           ${cat.label}
         </button>
       `).join('');
 
+      const publishTabHtml = `
+        <button class="cat-tab cat-tab-publish" id="nav-btn-publish" title="Write and publish your own article live">
+          ✍️ Publish Article
+        </button>
+      `;
+
+      tabsContainer.innerHTML = tabsHtml + publishTabHtml;
+
       tabsContainer.addEventListener('click', (e) => {
+        const publishBtn = e.target.closest('#nav-btn-publish');
+        if (publishBtn) {
+          this.publishModal.open();
+          return;
+        }
         const btn = e.target.closest('.cat-tab');
         if (btn) {
           const catId = btn.getAttribute('data-category');
@@ -385,6 +399,17 @@ class NewsApp {
     // Category filter
     if (this.currentCategory === CATEGORIES.SAVED) {
       filtered = cacheService.getBookmarks();
+    } else if (this.currentCategory === CATEGORIES.PUBLISHED) {
+      const customArticles = cacheService.getCustomArticles();
+      const liveUserArticles = this.articles.filter(a => a.isUserPublished || a.sourceId === 'user-published');
+      const ids = new Set();
+      filtered = [];
+      [...liveUserArticles, ...customArticles].forEach(art => {
+        if (!ids.has(art.id)) {
+          ids.add(art.id);
+          filtered.push(art);
+        }
+      });
     } else if (this.currentCategory !== CATEGORIES.ALL) {
       filtered = filtered.filter(a => a.category === this.currentCategory);
     }

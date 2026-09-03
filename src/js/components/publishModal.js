@@ -231,12 +231,17 @@ export class PublishModalComponent {
   }
 
   open(existingArticle = null) {
-    if (!firebaseService.isAdmin()) {
-      alert('Access Restricted: Only the Admin (dhananjaysaini2006@gmail.com) has permission to write and publish news stories.');
-      return;
-    }
-
     if (!this.modalEl) this.injectModalHtml();
+
+    const currentUser = firebaseService.getCurrentUser();
+    const bylineInput = this.modalEl.querySelector('#pub-byline');
+    if (bylineInput && !existingArticle) {
+      if (currentUser) {
+        bylineInput.value = currentUser.displayName || currentUser.email.split('@')[0];
+      } else {
+        bylineInput.value = "What's Going On Editorial Desk";
+      }
+    }
 
     this.isOpen = true;
     this.modalEl.classList.add('active');
